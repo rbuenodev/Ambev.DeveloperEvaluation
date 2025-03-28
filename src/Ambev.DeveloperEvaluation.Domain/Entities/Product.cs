@@ -13,7 +13,7 @@ public class Product : BaseEntity
 {
     /// <summary>
     /// Gets or sets the title/name of the product.
-    /// Must be unique within the product catalog and between 2-100 characters.
+    /// Must be unique within the product catalog and between 5-50 characters.
     /// </summary>
     public string Title { get; set; } = string.Empty;
 
@@ -51,6 +51,12 @@ public class Product : BaseEntity
     /// Determines product visibility and purchase availability.
     /// </summary>
     public ProductStatus Status { get; set; } = ProductStatus.Active;
+
+    /// <summary>
+    /// Gets or sets a value indicating whether this product has been removed from the catalog.
+    /// Soft delete flag to maintain history of removed products.
+    /// </summary>
+    public bool IsDeleted { get; set; } = false;
 
     /// <summary>
     /// Initializes a new instance of the Product class.

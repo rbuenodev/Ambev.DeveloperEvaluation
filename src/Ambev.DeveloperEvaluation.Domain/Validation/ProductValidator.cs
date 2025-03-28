@@ -10,10 +10,12 @@ namespace Ambev.DeveloperEvaluation.Domain.Validation
             RuleFor(product => product.Price).NotNull().Must(value => value > 0).WithMessage("Price must be greater than zero.");
             RuleFor(product => product.Title).NotEmpty()
                 .MinimumLength(5).WithMessage("Title must be at least 5 characters long.")
-                .MinimumLength(50).WithMessage("Title cannot have more than 50 characters.");
+                .MaximumLength(50).WithMessage("Title cannot have more than 50 characters.");
             RuleFor(product => product.Category).NotEmpty()
                 .MinimumLength(5).WithMessage("Category must be at least 5 characters long.")
-                .MinimumLength(50).WithMessage("Category cannot have more than 50 characters."); ;
+                .MaximumLength(50).WithMessage("Category cannot have more than 50 characters.");
+            RuleFor(product => product.Description)
+                .MaximumLength(255).WithMessage("Description cannot have more than 256 characters.");
         }
     }
 }

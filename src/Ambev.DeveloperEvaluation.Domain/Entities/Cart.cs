@@ -15,7 +15,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
         /// Gets the collection of products in the cart.
         /// Each item contains product, price and quantity.
         /// </summary>
-        public IEnumerable<CartItem> Products { get; set; } = Enumerable.Empty<CartItem>();
+        public ICollection<CartItem> Items { get; set; } = new List<CartItem>();
 
         /// <summary>
         /// Gets the unique sale/order reference number.
@@ -38,6 +38,10 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
         /// Gets the userId associated with this cart.
         /// </summary>
         public Guid UserId { get; set; }
+        /// <summary>
+        /// Gets the branch associated with this cart.
+        /// </summary>
+        public Branch Branch { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the Cart class.
@@ -91,7 +95,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
         /// <returns>The total cart value</returns>
         public decimal CalculateTotalProducts()
         {
-            return Products.Sum(item => item.CalculateTotal());
+            return Items.Sum(item => item.CalculateTotal());
         }
 
         /// <summary>
@@ -101,7 +105,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
         /// <returns>The total cart value</returns>
         public decimal CalculateTotalDiscounts()
         {
-            return Products.Sum(product => product.IsDiscountable() ? product.CalculateDiscounts() : 0);
+            return Items.Sum(product => product.IsDiscountable() ? product.CalculateDiscounts() : 0);
         }
     }
 }

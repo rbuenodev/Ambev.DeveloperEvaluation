@@ -11,13 +11,14 @@ namespace Ambev.DeveloperEvaluation.Domain.Validation
                 .NotNull().WithMessage("Product must be valid.");
 
             RuleFor(cartItem => cartItem.Price)
-                .NotNull().Must(value => value > 0).WithMessage("Price must be greater than zero");
+                .NotNull().Must(value => value > 0).WithMessage("Price must be greater than zero.");
 
             RuleFor(cartItem => cartItem.CartId)
-                .NotNull().WithMessage("Cart must be valid");
+                .NotNull().WithMessage("Cart must be valid.");
 
             RuleFor(cartItem => cartItem.Quantity)
-                .NotNull().Must(value => value > 0).WithMessage("Quantity must be graater than zero");
+                .NotNull().Must(value => value > 0).WithMessage("Quantity must be graater than zero.")
+                .Must(value => value <= 20).WithMessage("Quantity should be lower or equal than 20.");
         }
     }
 }
