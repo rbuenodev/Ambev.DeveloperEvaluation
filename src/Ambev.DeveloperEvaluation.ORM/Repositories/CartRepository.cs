@@ -132,7 +132,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
             }
 
             await _context.SaveChangesAsync(cancellationToken);
-
+            existingCart.Items = existingCart.Items.Where(i => !i.IsDeleted).ToList();
             return existingCart;
         }
     }

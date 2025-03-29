@@ -11,6 +11,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
 {
@@ -92,10 +93,8 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
         }
 
         [HttpGet("{id}")]
-        [Authorize]
         [ProducesResponseType(typeof(ApiResponseWithData<GetProductResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> GetProduct([FromRoute] Guid id, CancellationToken cancellationToken)
         {
             var request = new GetProductRequest { Id = id };
@@ -117,10 +116,8 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
 
 
         [HttpGet("All")]
-        //[Authorize]
         [ProducesResponseType(typeof(ApiResponseWithData<ICollection<GetAllProductsResponse>>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> GetAllProducts(CancellationToken cancellationToken)
         {
             var request = new GetAllProductsRequest();

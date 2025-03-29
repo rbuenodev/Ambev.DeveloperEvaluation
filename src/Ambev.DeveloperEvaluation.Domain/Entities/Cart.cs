@@ -79,12 +79,12 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
 
         /// <summary>
         /// Cancel the cart.
-        /// Changes the cart's status to Cancelled.
+        /// Changes the cart's status.
         /// Typically used for inactive carts after a timeout period.
         /// </summary>
-        public void Cancel()
+        public void ChangeStatus(CartStatus cartStatus)
         {
-            Status = CartStatus.Cancelled;
+            Status = cartStatus;
             UpdatedAt = DateTime.UtcNow;
         }
 
