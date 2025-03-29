@@ -12,9 +12,5 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Carts.CreateCart
         /// Gets the branch associated with this cart.
         /// </summary>
         public Branch Branch { get; set; }
-        /// <summary>
-        /// Gets the userId associated with this cart.
-        /// </summary>
-        public Guid UserId { get; set; }
     }
 }

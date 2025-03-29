@@ -1,4 +1,5 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Entities;
+using Ambev.DeveloperEvaluation.Domain.Enums;
 using Ambev.DeveloperEvaluation.Domain.Events;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -111,6 +112,11 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
                 throw new InvalidOperationException($"Cart with ID {cart.Id} does not exist.");
             }
 
+            if (cart.Status == CartStatus.Cancelled && existingCart.Status != cart.Status)
+            {
+                existingCart.AddDomainEvent(new SaleCancelledEvent(existingCart));
+            }
+
             _context.Entry(existingCart).CurrentValues.SetValues(cart);
 
             foreach (var item in cart.Items)
@@ -137,7 +143,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
             existingCart.DomainEvents.Add(new SaleModifiedEvent(existingCart));
             await _context.SaveChangesAsync(cancellationToken);
             existingCart.Items = existingCart.Items.Where(i => !i.IsDeleted).ToList();
-       
+
             return existingCart;
         }
     }

@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Ambev.DeveloperEvaluation.Domain.Validation;
+using FluentValidation;
 
 namespace Ambev.DeveloperEvaluation.Application.Carts.UpdateCart
 {
@@ -8,9 +9,9 @@ namespace Ambev.DeveloperEvaluation.Application.Carts.UpdateCart
         {
             RuleFor(c => c.Id).NotEmpty().NotNull();
             RuleFor(c => c.UserId).NotEmpty().NotNull();
-            RuleFor(c => c.Branch).NotNull();
+            RuleFor(c => c.Branch).IsInEnum();
             RuleFor(c => c.SaleNumber).NotEmpty().NotNull();
-
+            RuleFor(c => c.Items).SetValidator(new CartItemsValidator());
         }
     }
 }

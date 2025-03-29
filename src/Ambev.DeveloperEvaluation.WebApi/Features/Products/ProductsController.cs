@@ -11,7 +11,6 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
 {
@@ -115,7 +114,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
         }
 
 
-        [HttpGet("All")]
+        [HttpGet("all")]
         [ProducesResponseType(typeof(ApiResponseWithData<ICollection<GetAllProductsResponse>>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAllProducts(CancellationToken cancellationToken)

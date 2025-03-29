@@ -47,7 +47,7 @@ namespace Ambev.DeveloperEvaluation.ORM
         {
             try
             {
-                _dbContext.Users.Add(new Domain.Entities.User
+                var user = new Domain.Entities.User
                 {
                     CreatedAt = DateTime.UtcNow,
                     Email = "admin@teste.com",
@@ -58,7 +58,9 @@ namespace Ambev.DeveloperEvaluation.ORM
                     Status = Domain.Enums.UserStatus.Active,
                     UpdatedAt = DateTime.UtcNow,
                     Username = "admin"
-                });
+                };
+                _dbContext.Users.Add(user);
+                user.AddDomainEvent(new Domain.Events.UserRegisteredEvent(user));
                 await _dbContext.SaveChangesAsync();
             }
             catch (Exception ex)

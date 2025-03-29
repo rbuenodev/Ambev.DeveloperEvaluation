@@ -9,7 +9,7 @@ namespace Ambev.DeveloperEvaluation.Application.Carts.GetCart
         public GetCartProfile()
         {
             CreateMap<CreateCartCommand, Cart>();
-            CreateMap<Cart, CreateCartResult>();
+            CreateMap<Cart, GetCartResult>();
         }
     }
 }

@@ -16,6 +16,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Validation
 
             RuleFor(cart => cart.Branch)
                .NotNull().WithMessage("Branch is required.");
+            RuleFor(cart => cart.Items).SetValidator(new CartItemsValidator());
         }
     }
 }
