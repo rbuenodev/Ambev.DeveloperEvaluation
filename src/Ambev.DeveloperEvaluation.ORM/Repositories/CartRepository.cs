@@ -1,4 +1,5 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Entities;
+using Ambev.DeveloperEvaluation.Domain.Events;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,7 +30,9 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
         public async Task<Cart> CreateAsync(Cart cart, CancellationToken cancellationToken = default)
         {
             await _context.Carts.AddAsync(cart, cancellationToken);
+            cart.DomainEvents.Add(new SaleCreatedEvent(cart));
             await _context.SaveChangesAsync(cancellationToken);
+
             return cart;
         }
         /// <summary>
@@ -131,8 +134,10 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
                 }
             }
 
+            existingCart.DomainEvents.Add(new SaleModifiedEvent(existingCart));
             await _context.SaveChangesAsync(cancellationToken);
             existingCart.Items = existingCart.Items.Where(i => !i.IsDeleted).ToList();
+       
             return existingCart;
         }
     }

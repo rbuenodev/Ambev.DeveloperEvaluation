@@ -8,6 +8,7 @@ using Ambev.DeveloperEvaluation.ORM;
 using Ambev.DeveloperEvaluation.WebApi.Middleware;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Text.Json.Serialization;
@@ -59,11 +60,14 @@ public class Program
                 });
             });
 
-            builder.Services.AddDbContext<DefaultContext>(options =>
-                options.UseNpgsql(
-                    builder.Configuration.GetConnectionString("DefaultConnection"),
-                    b => b.MigrationsAssembly("Ambev.DeveloperEvaluation.ORM")
-                )
+            builder.Services.AddDbContext<DefaultContext>((sp, options) =>
+              {
+                  options.AddInterceptors(sp.GetRequiredService<ISaveChangesInterceptor>());
+                  options.UseNpgsql(
+                  builder.Configuration.GetConnectionString("DefaultConnection"),
+                  b => b.MigrationsAssembly("Ambev.DeveloperEvaluation.ORM")
+              );
+              }
             );
 
             builder.Services.AddJwtAuthentication(builder.Configuration);
@@ -75,6 +79,7 @@ public class Program
             builder.Services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssemblies(
+
                     typeof(ApplicationLayer).Assembly,
                     typeof(Program).Assembly
                 );

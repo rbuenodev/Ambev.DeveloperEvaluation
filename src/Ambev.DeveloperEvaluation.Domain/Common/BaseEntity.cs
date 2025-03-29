@@ -1,4 +1,5 @@
 ﻿using Ambev.DeveloperEvaluation.Common.Validation;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ambev.DeveloperEvaluation.Domain.Common;
 
@@ -7,6 +8,9 @@ public class BaseEntity : IComparable<BaseEntity>
     public Guid Id { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
+
+    [NotMapped]
+    public List<BaseEvent> DomainEvents { get; private set; } = new();
 
     public Task<IEnumerable<ValidationErrorDetail>> ValidateAsync()
     {
@@ -21,5 +25,18 @@ public class BaseEntity : IComparable<BaseEntity>
         }
 
         return other!.Id.CompareTo(Id);
+    }
+
+    public void AddDomainEvent(BaseEvent domainEvent)
+    {
+        DomainEvents.Add(domainEvent);
+    }
+    public void RemoveDomainEvent(BaseEvent domainEvent)
+    {
+        DomainEvents.Remove(domainEvent);
+    }
+    public void ClearDomainEvents()
+    {
+        DomainEvents.Clear();
     }
 }
