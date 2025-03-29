@@ -47,6 +47,8 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
         /// <summary>
         /// Initializes a new instance of the CartItem class.
         /// </summary>
+
+        public Cart Cart { get; set; }
         public CartItem()
         {
             CreatedAt = DateTime.UtcNow;
@@ -98,7 +100,9 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
         {
             if (newQuantity < 1)
             {
-                throw new ArgumentOutOfRangeException(nameof(newQuantity), "Quantity must be at least 1");
+                Quantity = 0;
+                MarkAsDeleted();
+                return;
             }
 
             if (newQuantity > 20)

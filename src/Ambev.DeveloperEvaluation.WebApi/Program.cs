@@ -32,7 +32,7 @@ public class Program
             builder.AddBasicHealthChecks();
             builder.Services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Richard Api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Richard Bueno Api", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
@@ -107,6 +107,7 @@ public class Program
 
             app.MapControllers();
 
+            app.UseOutputCache();
             app.Run();
         }
         catch (Exception ex)

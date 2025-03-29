@@ -1,5 +1,6 @@
 ﻿using Ambev.DeveloperEvaluation.Common.Validation;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Ambev.DeveloperEvaluation.Domain.Common;
 
@@ -9,6 +10,7 @@ public class BaseEntity : IComparable<BaseEntity>
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 
+    [JsonIgnore]
     [NotMapped]
     public List<BaseEvent> DomainEvents { get; private set; } = new();
 

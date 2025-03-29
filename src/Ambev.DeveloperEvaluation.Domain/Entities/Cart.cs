@@ -85,7 +85,6 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
         public void ChangeStatus(CartStatus cartStatus)
         {
             Status = cartStatus;
-            UpdatedAt = DateTime.UtcNow;
         }
 
         /// <summary>

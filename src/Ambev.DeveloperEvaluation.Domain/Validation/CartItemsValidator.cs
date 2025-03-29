@@ -11,15 +11,17 @@ namespace Ambev.DeveloperEvaluation.Domain.Validation
                 .WithMessage("Cart cannot have more than 20 quantity of each product");
         }
 
+        public CartItemsValidator(int addingValue)
+        {
+            RuleFor(items => items).Must(items => !ContainsItemsExceedingMaxQuantity(items.ToList(), 20 - addingValue))
+                .WithMessage("Cart cannot have more than 20 quantity of each product");
+        }
+
         private bool ContainsItemsExceedingMaxQuantity(List<CartItem> items, int maxQuantityPerItem)
         {
-            var itemGroups = items.GroupBy(item => item.ProductId)
-                                 .Select(group => new
-                                 {
-                                     Id = group.Key,
-                                     TotalQuantity = group.Sum(item => item.Quantity)
-                                 });
-            return itemGroups.Any(group => group.TotalQuantity > maxQuantityPerItem);
+            var TotalQuantity = items.GroupBy(item => item.ProductId)
+                                 .Sum(group => group.Sum(item => item.Quantity));
+            return TotalQuantity > maxQuantityPerItem;
         }
     }
 }

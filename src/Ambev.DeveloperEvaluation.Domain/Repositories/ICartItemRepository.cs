@@ -34,5 +34,20 @@ namespace Ambev.DeveloperEvaluation.Domain.Repositories
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>True if the cartItem was deleted, false if not found</returns>
         Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieves cartItems by a filter
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <param name="predicate">predicate function</param>
+        /// <returns>The list of cartItems if found, null otherwise</returns>
+        public Task<IEnumerable<CartItem?>> GetFiltered(Func<CartItem, bool> predicate, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Updates a cartItem in the repository
+        /// </summary>
+        /// <param name="cartItem">The cartItem to update</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>The updated cartItem</returns>
+        Task<CartItem> UpdateAsync(CartItem cartItem, CancellationToken cancellationToken = default);
     }
 }

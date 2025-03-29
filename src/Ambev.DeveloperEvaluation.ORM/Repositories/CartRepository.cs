@@ -116,6 +116,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
             {
                 existingCart.AddDomainEvent(new SaleCancelledEvent(existingCart));
             }
+            cart.UpdatedAt = DateTime.UtcNow;
 
             _context.Entry(existingCart).CurrentValues.SetValues(cart);
 
