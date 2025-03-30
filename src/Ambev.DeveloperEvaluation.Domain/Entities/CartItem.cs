@@ -127,11 +127,12 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
         {
             if (IsDeleted) return 0;
 
-            if (Quantity >= 4)
+            if (Quantity > 4 && Quantity < 10)
             {
                 return Price * Quantity * 0.1m;
             }
-            else if (Quantity >= 10)
+
+            if (Quantity >= 10)
             {
                 return Price * Quantity * 0.2m;
             }
