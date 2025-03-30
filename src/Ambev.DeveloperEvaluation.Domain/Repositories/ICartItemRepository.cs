@@ -1,4 +1,5 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Entities;
+using System.Linq.Expressions;
 
 namespace Ambev.DeveloperEvaluation.Domain.Repositories
 {
@@ -41,7 +42,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Repositories
         /// <param name="cancellationToken">Cancellation token</param>
         /// <param name="predicate">predicate function</param>
         /// <returns>The list of cartItems if found, null otherwise</returns>
-        public Task<IEnumerable<CartItem?>> GetFiltered(Func<CartItem, bool> predicate, CancellationToken cancellationToken = default);
+        public Task<IEnumerable<CartItem?>> GetFiltered(Expression<Func<CartItem, bool>> predicate, CancellationToken cancellationToken = default);
         /// <summary>
         /// Updates a cartItem in the repository
         /// </summary>

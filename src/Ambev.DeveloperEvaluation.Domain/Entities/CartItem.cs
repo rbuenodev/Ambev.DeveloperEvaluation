@@ -47,8 +47,6 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
         /// <summary>
         /// Initializes a new instance of the CartItem class.
         /// </summary>
-
-        public Cart Cart { get; set; }
         public CartItem()
         {
             CreatedAt = DateTime.UtcNow;

@@ -8,7 +8,7 @@ namespace Ambev.DeveloperEvaluation.Application.CartItems.AddCartItem
         {
             RuleFor(i => i.CartId).NotEmpty().NotNull();
             RuleFor(i => i.ProductId).NotEmpty().NotNull();
-            RuleFor(i => i.Quantity).LessThanOrEqualTo(20);
+            RuleFor(i => i.Quantity).GreaterThan(0).LessThanOrEqualTo(20);
             RuleFor(i => i.Price).GreaterThan(0);
         }
     }

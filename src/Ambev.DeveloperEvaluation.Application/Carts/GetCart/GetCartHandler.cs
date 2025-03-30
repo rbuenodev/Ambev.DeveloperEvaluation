@@ -26,11 +26,7 @@ namespace Ambev.DeveloperEvaluation.Application.Carts.GetCart
             if (cart == null)
                 throw new KeyNotFoundException($"Cart with ID {command.Id} not found");
 
-            var result = _mapper.Map<GetCartResult>(cart);
-            result.TotalProducts = cart.CalculateTotalProducts();
-            result.TotalDiscounts = cart.CalculateTotalDiscounts();
-            result.Total = result.TotalProducts - result.TotalDiscounts;
-            return result;
+            return _mapper.Map<GetCartResult>(cart);
         }
     }
 }

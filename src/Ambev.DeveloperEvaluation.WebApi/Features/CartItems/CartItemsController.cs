@@ -52,6 +52,11 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.CartItems
         public async Task<IActionResult> AddCartItem([FromBody] AddCartItemRequest request, CancellationToken cancellationToken)
         {
             var command = _mapper.Map<AddCartItemCommand>(request);
+            var validator = new AddCartItemValidator();
+            var validationResult = await validator.ValidateAsync(command, cancellationToken);
+            if (!validationResult.IsValid)
+                return BadRequest(validationResult.Errors);
+
             var response = await _mediator.Send(command, cancellationToken);
             return Ok(new ApiResponse
             {
@@ -68,6 +73,10 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.CartItems
         public async Task<IActionResult> DecreaseCartItem([FromBody] DecreaseCartItemRequest request, CancellationToken cancellationToken)
         {
             var command = _mapper.Map<DecreaseCartItemCommand>(request);
+            var validator = new DecreaseCartItemValidator();
+            var validationResult = await validator.ValidateAsync(command, cancellationToken);
+            if (!validationResult.IsValid)
+                return BadRequest(validationResult.Errors);
             var response = await _mediator.Send(command, cancellationToken);
             return Ok(new ApiResponse
             {

@@ -18,6 +18,8 @@ namespace Ambev.DeveloperEvaluation.Application.CartItems.RemoveCartItem
                 throw new ValidationException((IEnumerable<FluentValidation.Results.ValidationFailure>)validationResult.Errors);
 
             var cartItem = await _cartItemRepository.GetByIdAsync(command.Id, cancellationToken);
+            if (cartItem == null)
+                return new RemoveCartItemResult { Success = false };
             cartItem.MarkAsDeleted();
             await _cartItemRepository.UpdateAsync(cartItem, cancellationToken);
             return new RemoveCartItemResult { Success = true };
