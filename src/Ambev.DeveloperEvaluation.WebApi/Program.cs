@@ -96,6 +96,7 @@ public class Program
                 app.InitialiseDatabaseAsync().Wait();
                 app.UseSwagger();
                 app.UseSwaggerUI();
+                app.Map("/", () => Results.Redirect("/swagger"));
             }
 
             app.UseHttpsRedirection();
