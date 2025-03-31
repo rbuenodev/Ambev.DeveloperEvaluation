@@ -15,8 +15,6 @@ Enterprise-grade .NET 8 application with Redis caching, event-driven architectur
 - [Tests](#tests)
 - [Event Architecture](#event-architecture)
 - [Upcoming Features](#upcoming-features)
-- [Troubleshooting](#troubleshooting)
-- [License](#license)
 
 ## Features
 - **Redis Output Caching**: All endpoints cached
