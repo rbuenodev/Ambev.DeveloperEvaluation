@@ -25,9 +25,6 @@ namespace Ambev.DeveloperEvaluation.Application.Carts.UpdateCart
             var cart = _mapper.Map<Cart>(command);
             var updatedCart = await _cartRepository.UpdateAsync(cart, cancellationToken);
             var result = _mapper.Map<UpdateCartResult>(updatedCart);
-            result.TotalProducts = cart.CalculateTotalProducts();
-            result.TotalDiscounts = cart.CalculateTotalDiscounts();
-            result.Total = result.TotalProducts - result.TotalDiscounts;
             return result;
         }
     }

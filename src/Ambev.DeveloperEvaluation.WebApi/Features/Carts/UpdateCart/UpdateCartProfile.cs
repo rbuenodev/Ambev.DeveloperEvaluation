@@ -8,7 +8,9 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Carts.UpdateCart
         public UpdateCartProfile()
         {
             CreateMap<UpdateCartRequest, UpdateCartCommand>();
+            CreateMap<UpdateCartItemRequest, UpdateCartItemCommand>();
             CreateMap<UpdateCartResult, UpdateCartResponse>();
+            CreateMap<UpdateCartItemResult, UpdateCartItemResponse>();
         }
     }
 }

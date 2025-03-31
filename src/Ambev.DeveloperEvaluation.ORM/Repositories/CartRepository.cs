@@ -122,8 +122,8 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
 
             foreach (var item in cart.Items)
             {
+                item.CartId = cart.Id;
                 var existingItem = existingCart.Items.FirstOrDefault(i => i.Id == item.Id);
-
                 if (existingItem != null)
                 {
                     _context.Entry(existingItem).CurrentValues.SetValues(item);

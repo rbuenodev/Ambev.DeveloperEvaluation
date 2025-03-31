@@ -1,5 +1,4 @@
 ﻿using Ambev.DeveloperEvaluation.Common.Validation;
-using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Domain.Enums;
 using MediatR;
 
@@ -8,7 +7,7 @@ namespace Ambev.DeveloperEvaluation.Application.Carts.UpdateCart
     public class UpdateCartCommand : IRequest<UpdateCartResult>
     {
         public Guid Id { get; set; }
-        public ICollection<CartItem> Items { get; set; } = new List<CartItem>();
+        public ICollection<UpdateCartItemCommand> Items { get; set; } = new List<UpdateCartItemCommand>();
 
         /// <summary>
         /// Gets the unique sale/order reference number.
@@ -36,5 +35,35 @@ namespace Ambev.DeveloperEvaluation.Application.Carts.UpdateCart
                 Errors = result.Errors.Select(o => (ValidationErrorDetail)o)
             };
         }
+    }
+
+    public class UpdateCartItemCommand
+    {
+        /// <summary>
+        /// Gets or sets the unique identifier of cartItem
+        /// </summary>
+        public Guid Id { get; set; }
+        /// <summary>
+        /// Gets or sets the unique identifier of the associated product.
+        /// </summary>
+        public Guid ProductId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the quantity of this product in the cart.
+        /// </summary>
+        public int Quantity { get; set; } = 0;
+
+        /// <summary>
+        /// Gets or sets the unit price of the product at the time it was added to the cart.
+        /// </summary>
+        public decimal Price { get; set; } = 0;
+        /// <summary>
+        /// Gets or sets the total discounts
+        /// </summary>
+        public decimal TotalDiscounts { get; set; }
+        /// <summary>
+        /// Gets or sets the total product
+        /// </summary>
+        public decimal Total { get; set; }
     }
 }

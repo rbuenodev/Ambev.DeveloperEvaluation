@@ -19,9 +19,8 @@ namespace Ambev.DeveloperEvaluation.Domain.Validation
 
         private bool ContainsItemsExceedingMaxQuantity(List<CartItem> items, int maxQuantityPerItem)
         {
-            var TotalQuantity = items.GroupBy(item => item.ProductId)
-                                 .Sum(group => group.Sum(item => item.Quantity));
-            return TotalQuantity > maxQuantityPerItem;
+            return items.GroupBy(item => item.ProductId)
+                      .Any(group => group.Sum(item => item.Quantity) > maxQuantityPerItem);
         }
     }
 }

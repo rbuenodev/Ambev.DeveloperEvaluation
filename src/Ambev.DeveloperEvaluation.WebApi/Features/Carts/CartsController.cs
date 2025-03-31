@@ -151,6 +151,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Carts
             if (!validationResult.IsValid)
                 return BadRequest(validationResult.Errors);
             var command = _mapper.Map<UpdateCartCommand>(request);
+            command.UserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var response = await _mediator.Send(command, cancellationToken);
             return Ok(new ApiResponseWithData<UpdateCartResponse>
             {
