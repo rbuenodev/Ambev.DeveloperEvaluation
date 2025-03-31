@@ -62,7 +62,7 @@ dotnet test Tests/Ambev.DeveloperEvaluation.Functional
 
 ### Swagger UI
 Available at `/swagger` when running:
-- Docker: `https://localhost:8081/swagger` |  `http://localhost:8081/swagger` 
+- Docker: `https://localhost:8081/swagger` |  `http://localhost:8080/swagger` 
 - Local: `https://localhost:7181/swagger`  |  `http://localhost:5119/swagger`
 
 ## API Endpoints
