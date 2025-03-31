@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Ambev.DeveloperEvaluation.Functional": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
